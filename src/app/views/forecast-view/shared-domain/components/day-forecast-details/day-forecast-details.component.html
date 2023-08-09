@@ -1,5 +1,5 @@
-<h3>Details for: {{ currentDay.dt_txt | cardDate }}</h3>
-<mat-card class="day-forecast">
+<h2>Details for: {{ currentDay.dt_txt | cardDate }}</h2>
+<mat-card class="day-forecast" color="primary">
   <weather-app-day-forecast-small
     *ngFor="let hourForecast of dayForecastList"
     [weather]="hourForecast"

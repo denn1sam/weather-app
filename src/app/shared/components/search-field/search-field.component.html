@@ -1,0 +1,6 @@
+<mat-form-field class="search-field">
+  <input matInput type="text" [formControl]="searchControl" name="searchInput" />
+  <mat-label>Search</mat-label>
+  <mat-icon *ngIf="searchControl.value" matSuffix class="icon" (click)="searchControl.setValue('')">close</mat-icon>
+  <mat-icon *ngIf="!searchControl.value" matSuffix class="icon">search</mat-icon>
+</mat-form-field>

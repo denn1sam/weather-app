@@ -1,9 +1,11 @@
 :host {
-  display: flex;
-  flex: 1;
+  display: block;
+}
+
+.search-field {
   width: 100%;
 }
 
-.forecast-card {
+.icon {
   cursor: pointer;
 }

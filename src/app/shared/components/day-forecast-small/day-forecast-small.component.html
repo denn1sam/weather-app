@@ -1,13 +1,21 @@
-<mat-card>
-  <ng-container *ngIf="mode === forecastInfoType.Day">
-    <p>{{ dayName }}</p>
-    <p>{{ dayNumber }}</p>
-  </ng-container>
-  <ng-container *ngIf="mode === forecastInfoType.Time">
-    <p>{{ dayTime }}</p>
-  </ng-container>
+<mat-card class="card-container">
+  <div *ngIf="mode === forecastInfoType.Day">
+    <span>{{ dayName }}</span
+    >, <span>{{ dayNumber }}</span>
+  </div>
 
-  <img src="https://openweathermap.org/img/wn/{{ icon }}@2x.png" alt="weather-icon" />
+  <div *ngIf="mode === forecastInfoType.Time">
+    <p>{{ dayTime }}</p>
+  </div>
+
+  <img [src]="icon! | weatherImage" [alt]="iconDescription" />
+  <p>
+    <strong>{{ description }}</strong>
+  </p>
+  <p class="humidity">
+    <mat-icon>water_drop</mat-icon>
+    {{ humidity }}%
+  </p>
   <div class="temperature-block">
     <div class="column">
       <span>min:</span>

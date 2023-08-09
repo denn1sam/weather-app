@@ -9,4 +9,8 @@
   </weather-app-day-forecast-wrapper>
 </div>
 
-<weather-app-day-forecast-details *ngIf="dayForecast" [dayForecast]="dayForecast"></weather-app-day-forecast-details>
+<weather-app-day-forecast-details
+  *ngIf="dayForecast"
+  [@slideIn]
+  [dayForecast]="dayForecast"
+  class="forecast-details"></weather-app-day-forecast-details>

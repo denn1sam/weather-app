@@ -1,6 +1,7 @@
 :host {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .temperature-block {
@@ -11,4 +12,14 @@
 .column {
   display: flex;
   flex-direction: column;
+}
+
+.humidity {
+  display: flex;
+
+  .mat-icon {
+    font-size: 1rem;
+    width: 1rem;
+    height: 1rem;
+  }
 }

@@ -6,6 +6,10 @@
 
 .forecast-board {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
   gap: 0.5rem;
+}
+
+.forecast-details {
+  margin-top: 1rem;
 }

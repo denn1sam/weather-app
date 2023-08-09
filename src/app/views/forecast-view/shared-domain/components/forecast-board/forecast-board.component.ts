@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { City, Forecast, Weather } from '@services/forecast/forecast.model';
+import { slideIn } from '@shared/animations/slide-in.animation';
 import { CityCardComponent } from '@shared/components/city-card/city-card.component';
 import { DayForecastDetailsComponent } from '../day-forecast-details/day-forecast-details.component';
 import { DayForecastWrapperComponent } from '../day-forecast-wrapper/day-forecast-wrapper.component';
@@ -13,6 +14,7 @@ import { DayForecastWrapperComponent } from '../day-forecast-wrapper/day-forecas
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [CommonModule, DayForecastWrapperComponent, CityCardComponent, DayForecastDetailsComponent, MatCardModule],
+  animations: [slideIn()],
 })
 export class ForecastBoardComponent {
   @Input() public set forecast(forecast: Forecast | null) {
