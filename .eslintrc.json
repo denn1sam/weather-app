@@ -1,0 +1,407 @@
+{
+  "root": true,
+  "ignorePatterns": ["projects/**/*"],
+  // TODO: delete some globals
+  "globals": {
+    "window": true,
+    "document": true,
+    "console": true,
+    "localStorage": true,
+    "require": true
+  },
+  "plugins": ["unicorn"],
+  "rules": {
+    "unicorn/filename-case": [
+      "error",
+      {
+        "case": "kebabCase"
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["tsconfig.json"],
+        "createDefaultProgram": true
+      },
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint", "import"],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:import/errors",
+        "plugin:import/typescript",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:prettier/recommended"
+      ],
+      "rules": {
+        "import/no-duplicates": "error",
+        "id-length": ["error", { "min": 3, "exceptions": ["i", "j", "_", "err", "sut", "id"], "properties": "never" }],
+        "@typescript-eslint/no-explicit-any": "error",
+        "@angular-eslint/use-lifecycle-interface": "error",
+        "lines-between-class-members": "error",
+        "import/newline-after-import": "error",
+        "eqeqeq": ["error", "smart"],
+        "@typescript-eslint/explicit-member-accessibility": [
+          "warn",
+          {
+            "accessibility": "explicit",
+            "overrides": {
+              "accessors": "explicit",
+              "constructors": "no-public",
+              "methods": "explicit",
+              "properties": "explicit",
+              "parameterProperties": "explicit"
+            }
+          }
+        ],
+        "@typescript-eslint/explicit-function-return-type": ["warn"],
+        "import/order": [
+          "error",
+          {
+            "newlines-between": "always",
+            "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+            "pathGroups": [
+              {
+                "pattern": "src/**",
+                "group": "internal",
+                "position": "after"
+              },
+              {
+                "pattern": "@core-lib",
+                "group": "internal",
+                "position": "before"
+              },
+              {
+                "pattern": "@library/**",
+                "group": "internal",
+                "position": "before"
+              }
+            ],
+            "pathGroupsExcludedImportTypes": ["builtin"]
+          }
+        ],
+        "prettier/prettier": [
+          "error",
+          {
+            "endOfLine": "auto",
+            "trailingComma": "all"
+          }
+        ],
+        "comma-dangle": ["error", "always-multiline"],
+        "@angular-eslint/no-host-metadata-property": [
+          "error",
+          {
+            "allowStatic": true
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "ldc",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "ldc",
+            "style": "kebab-case"
+          }
+        ],
+        "@typescript-eslint/member-ordering": [
+          "error",
+          {
+            "default": [
+              "signature",
+              // Fields
+              "public-decorated-field",
+              "public-instance-field",
+              "protected-decorated-field",
+              "protected-instance-field",
+              "private-decorated-field",
+              "private-instance-field",
+              "public-abstract-field",
+              "protected-abstract-field",
+              "private-abstract-field",
+              // Constructors
+              "public-constructor",
+              "protected-constructor",
+              "private-constructor",
+              // Methods
+              "public-decorated-method",
+              "public-instance-method",
+              "protected-decorated-method",
+              "protected-instance-method",
+              "private-decorated-method",
+              "private-instance-method",
+              "public-abstract-method",
+              "protected-abstract-method",
+              "private-abstract-method",
+              "public-static-field",
+              "protected-static-field",
+              "private-static-field",
+              "public-static-method",
+              "protected-static-method",
+              "private-static-method"
+            ]
+          }
+        ],
+        "padding-line-between-statements": [
+          "error",
+          {
+            "blankLine": "always",
+            "prev": ["const", "let", "var"],
+            "next": "*"
+          },
+          {
+            "blankLine": "any",
+            "prev": ["const", "let", "var"],
+            "next": ["const", "let", "var"]
+          },
+          {
+            "blankLine": "always",
+            "prev": "directive",
+            "next": "*"
+          },
+          {
+            "blankLine": "any",
+            "prev": "directive",
+            "next": "directive"
+          },
+          {
+            "blankLine": "always",
+            "prev": "block",
+            "next": "*"
+          },
+          {
+            "blankLine": "any",
+            "prev": "block",
+            "next": "block"
+          },
+          {
+            "blankLine": "always",
+            "prev": "*",
+            "next": "return"
+          },
+          {
+            "blankLine": "always",
+            "prev": "*",
+            "next": ["multiline-expression", "if", "for", "while", "try", "switch", "do"]
+          }
+        ],
+        "no-console": [
+          "error",
+          {
+            "allow": ["warn", "error"]
+          }
+        ],
+        "no-unused-vars": [
+          "error",
+          {
+            "argsIgnorePattern": "^_"
+          }
+        ],
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          {
+            "argsIgnorePattern": "^_"
+          }
+        ],
+        "no-constant-condition": "error",
+        "no-restricted-imports": ["error", "lodash"],
+        "@typescript-eslint/ban-types": "error",
+        "arrow-body-style": "error",
+        "no-async-promise-executor": "error",
+        "no-undef": "error",
+        "no-useless-escape": "error",
+        "no-prototype-builtins": "error",
+        "getter-return": "error",
+        "@angular-eslint/no-input-rename": "error",
+        "max-len": [
+          "error",
+          // todo change line to 100 or less
+          {
+            "code": 140,
+            "ignorePattern": "^import .*",
+            "ignoreUrls": true,
+            "ignoreRegExpLiterals": true
+          }
+        ],
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": "property",
+            "modifiers": ["public"],
+            "leadingUnderscore": "forbid",
+            "format": ["camelCase"],
+            "filter": {
+              "regex": "(ngAcceptInputType_.*)|(ngTemplateGuard_.*)",
+              "match": false
+            }
+          },
+          {
+            "selector": "variable",
+            "leadingUnderscore": "forbid",
+            "format": ["camelCase", "UPPER_CASE"]
+          },
+          {
+            "selector": "parameter",
+            "format": ["camelCase"]
+          },
+          {
+            "selector": "objectLiteralProperty",
+            "types": ["array", "function"],
+            "format": ["camelCase"]
+          },
+          {
+            "selector": "objectLiteralProperty",
+            "types": ["boolean", "string", "number"],
+            "format": ["camelCase", "UPPER_CASE", "PascalCase"]
+          },
+          {
+            "selector": ["property", "parameterProperty"],
+            "modifiers": ["private"],
+            "leadingUnderscore": "require",
+            "format": ["camelCase"]
+          },
+          {
+            "selector": "method",
+            "modifiers": ["private"],
+            "leadingUnderscore": "forbid",
+            "format": ["camelCase"]
+          },
+          {
+            "selector": ["enum", "enumMember"],
+            "format": ["PascalCase", "UPPER_CASE"]
+          },
+          {
+            "selector": ["typeLike", "interface"],
+            "format": ["PascalCase"],
+            "leadingUnderscore": "allow"
+          },
+          {
+            "selector": "parameter",
+            "modifiers": ["unused"],
+            "leadingUnderscore": "allow",
+            "format": null
+          },
+          {
+            "selector": ["classProperty", "typeProperty"],
+            "modifiers": ["readonly"],
+            "format": ["UPPER_CASE", "PascalCase", "camelCase"],
+            "leadingUnderscore": "forbid"
+          },
+          {
+            "selector": "class",
+            "modifiers": ["abstract"],
+            "prefix": ["Abstract"],
+            "format": null
+          }
+        ],
+        "import/no-restricted-paths": [
+          "error",
+          {
+            "zones": [
+              {
+                "target": "src/app/shared",
+                "from": "src/app",
+                "except": ["./shared", "./utils", "./models"]
+              },
+              {
+                "target": "src/app/core",
+                "from": "src/app",
+                "except": [
+                  "./core",
+                  "./models",
+                  "./utils",
+                  "./api", // TODO: remove this zone after auth module updating
+                  "./shared", // TODO: remove this zone after auth module updating
+                  "./services" // TODO: remove this zone after auth module remake
+                ]
+              },
+              {
+                "target": "src/app/models",
+                "from": "src/app",
+                "except": ["./models", "./api"]
+              },
+              {
+                "target": "src/app/services",
+                "from": "src/app",
+                "except": ["./models", "./api", "./core", "./utils", "./services"]
+              },
+              {
+                "target": "src/app/root",
+                "from": "src/app",
+                "except": [
+                  "./api",
+                  "./shared-domain",
+                  "./core",
+                  "./directives",
+                  "./models",
+                  "./services",
+                  "./shared",
+                  "./utils",
+                  "./auth",
+                  "./root"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "rules": {}
+    },
+    {
+      "files": ["*.js"],
+      "rules": {},
+      "extends": ["eslint:recommended"],
+      "env": {
+        "es6": true
+      }
+    },
+    {
+      "files": ["**/*.spec.ts", "**/*.spec-helper.ts"],
+      "extends": ["plugin:jest/recommended"],
+      "plugins": ["jest"],
+      "env": {
+        "jest": true
+      },
+      "rules": {
+        "jest/no-disabled-tests": "off", // we have disabled tests
+        "jest/no-done-callback": "off",
+        "jest/expect-expect": [
+          "error",
+          {
+            "assertFunctionNames": ["expect", "expectObservable", "expectSubscriptions"]
+          }
+        ],
+        "jest/no-standalone-expect": [
+          "error",
+          {
+            "additionalTestBlockFunctions": ["theoretically"]
+          }
+        ]
+      }
+    }
+  ],
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "./tsconfig.json"
+      }
+    }
+  }
+}

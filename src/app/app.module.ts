@@ -3,10 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ForecastViewComponent } from './views/forecast-view/forecast-view.component';
 
 @NgModule({
-  declarations: [AppComponent, ForecastViewComponent],
+  declarations: [AppComponent],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
