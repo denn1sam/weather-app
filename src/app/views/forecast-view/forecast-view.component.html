@@ -1,2 +1,8 @@
-<p>forecast-view works!</p>
-<p>forecast-view works!</p>
+<section class="page-section">
+  <mat-form-field>
+    <input matInput type="text" [formControl]="search" />
+    <mat-label>Search</mat-label>
+  </mat-form-field>
+
+  <weather-app-forecast-board *ngIf="forecast$ | async as forecast" [forecast]="forecast"></weather-app-forecast-board>
+</section>

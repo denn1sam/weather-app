@@ -1,0 +1,6 @@
+<weather-app-city-card *ngIf="city" class="city-card" [city]="city"></weather-app-city-card>
+
+<div class="forecast-board">
+  <weather-app-day-forecast-small *ngFor="let weather of forecastFor5Days" [weather]="weather" class="forecast-card">
+  </weather-app-day-forecast-small>
+</div>

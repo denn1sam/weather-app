@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.temperature-block {
+  display: flex;
+  justify-content: space-between;
+}
