@@ -1,10 +1,16 @@
 <section class="page-section">
   <weather-app-search-field class="search-field" [formControl]="search"></weather-app-search-field>
 
+  <weather-app-saved-cities-list
+    class="saved-cities"
+    [citiesList]="savedCities$ | async"
+    (selectCity)="search.setValue($event)">
+  </weather-app-saved-cities-list>
+
   <weather-app-forecast-board
     *ngIf="forecast$ | async as forecast; else noData"
-    [forecast]="forecast"></weather-app-forecast-board>
-
+    [forecast]="forecast"
+    (saveCity)="saveCity($event)"></weather-app-forecast-board>
   <ng-template #noData>
     <div class="no-data">No Data</div>
   </ng-template>

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { City } from '@services/forecast/forecast.model';
 
@@ -9,7 +10,7 @@ import { City } from '@services/forecast/forecast.model';
   styleUrls: ['./city-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, MatCardModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule],
 })
 export class CityCardComponent {
   @Input() set city(city: City | undefined) {
@@ -18,6 +19,8 @@ export class CityCardComponent {
       this.mapProperties(city);
     }
   }
+
+  @Output() public saveCity = new EventEmitter();
 
   public name!: string;
   public country!: string;

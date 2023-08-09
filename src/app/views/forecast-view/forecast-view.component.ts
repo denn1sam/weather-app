@@ -1,7 +1,19 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ForecastService } from '@services/forecast';
-import { Subject, catchError, debounceTime, filter, of, shareReplay, startWith, switchMap, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  Subject,
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  of,
+  shareReplay,
+  startWith,
+  switchMap,
+  tap,
+} from 'rxjs';
 
 @Component({
   selector: 'weather-app-forecast-view',
@@ -15,6 +27,7 @@ export class ForecastViewComponent {
   public forecast$ = this.search.valueChanges.pipe(
     startWith('Lviv'),
     debounceTime(400),
+    distinctUntilChanged(),
     filter(Boolean),
     tap(() => this.isLoading$.next(true)),
     switchMap(cityName =>
@@ -31,5 +44,14 @@ export class ForecastViewComponent {
 
   public isLoading$ = new Subject<boolean>();
 
+  public savedCities$ = new BehaviorSubject<string[]>(JSON.parse(localStorage.getItem('savedCities')!) || []);
+
   constructor(private forecastService: ForecastService) {}
+
+  public saveCity(cityName: string): void {
+    const savedCities = [...this.savedCities$.getValue(), cityName];
+
+    localStorage.setItem('savedCities', JSON.stringify(savedCities));
+    this.savedCities$.next(savedCities);
+  }
 }

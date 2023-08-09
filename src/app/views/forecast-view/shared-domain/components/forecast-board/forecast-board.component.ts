@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { City, Forecast, Weather } from '@services/forecast/forecast.model';
 import { slideIn } from '@shared/animations/slide-in.animation';
@@ -23,6 +23,8 @@ export class ForecastBoardComponent {
     }
   }
 
+  @Output() public saveCity = new EventEmitter<string>();
+
   public city?: City;
 
   public forecastFor5Days?: Weather[][];
@@ -34,6 +36,7 @@ export class ForecastBoardComponent {
   }
 
   private mapForecast(forecast: Forecast): void {
+    this.dayForecast = undefined;
     this.city = forecast.city;
 
     let dayOfWeek: number;
@@ -51,7 +54,5 @@ export class ForecastBoardComponent {
     }, {} as Weather[][]);
 
     this.forecastFor5Days = Object.values(forecastFor5Days).sort((first, second) => first[0].dt - second[0].dt);
-
-    console.log(this.forecastFor5Days);
   }
 }

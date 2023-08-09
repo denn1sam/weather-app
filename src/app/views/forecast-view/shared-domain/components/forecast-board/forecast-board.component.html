@@ -1,4 +1,8 @@
-<weather-app-city-card *ngIf="city" class="city-card" [city]="city"></weather-app-city-card>
+<weather-app-city-card
+  *ngIf="city"
+  class="city-card"
+  [city]="city"
+  (saveCity)="saveCity.emit(city.name)"></weather-app-city-card>
 
 <div class="forecast-board">
   <weather-app-day-forecast-wrapper

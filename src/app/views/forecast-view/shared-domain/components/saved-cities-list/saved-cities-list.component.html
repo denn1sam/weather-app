@@ -1,0 +1,5 @@
+<mat-chip-list aria-label="city selection">
+  <mat-chip *ngFor="let savedCity of citiesList" color="primary" (click)="selectCity.emit(savedCity)">
+    {{ savedCity }}
+  </mat-chip>
+</mat-chip-list>
