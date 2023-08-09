@@ -1,0 +1,10 @@
+.forecast-card {
+  flex: 1;
+}
+
+.day-forecast {
+  display: flex;
+  gap: 0.5rem;
+  overflow: auto;
+  background-color: #e3e3e3;
+}

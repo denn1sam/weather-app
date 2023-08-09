@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
 import { City, Forecast, Weather } from '@services/forecast/forecast.model';
 import { CityCardComponent } from '@shared/components/city-card/city-card.component';
-import { DayForecastSmallComponent } from '@shared/components/day-forecast-small/day-forecast-small.component';
+import { DayForecastDetailsComponent } from '../day-forecast-details/day-forecast-details.component';
+import { DayForecastWrapperComponent } from '../day-forecast-wrapper/day-forecast-wrapper.component';
 
 @Component({
   selector: 'weather-app-forecast-board',
@@ -10,7 +12,7 @@ import { DayForecastSmallComponent } from '@shared/components/day-forecast-small
   styleUrls: ['./forecast-board.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, DayForecastSmallComponent, CityCardComponent],
+  imports: [CommonModule, DayForecastWrapperComponent, CityCardComponent, DayForecastDetailsComponent, MatCardModule],
 })
 export class ForecastBoardComponent {
   @Input() public set forecast(forecast: Forecast | null) {
@@ -22,6 +24,12 @@ export class ForecastBoardComponent {
   public city?: City;
 
   public forecastFor5Days?: Weather[][];
+
+  public dayForecast?: Weather[];
+
+  public showDetails(dayForecast: Weather[]): void {
+    this.dayForecast = dayForecast;
+  }
 
   private mapForecast(forecast: Forecast): void {
     this.city = forecast.city;

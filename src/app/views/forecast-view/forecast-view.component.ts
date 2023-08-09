@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ForecastService } from '@services/forecast';
-import { debounceTime, filter, switchMap } from 'rxjs';
+import { debounceTime, filter, startWith, switchMap } from 'rxjs';
 import { lvivWeather } from './lviv-weather.constant';
 
 @Component({
@@ -13,9 +13,8 @@ import { lvivWeather } from './lviv-weather.constant';
 export class ForecastViewComponent implements OnInit {
   public search = new FormControl<string>('');
 
-  // public forecast$: Observable<Forecast> = of(lvivWeather);
-
   public forecast$ = this.search.valueChanges.pipe(
+    startWith('Lviv'),
     debounceTime(400),
     filter(Boolean),
     switchMap(cityName => this.forecastService.getForecastFor5Days(cityName)),
@@ -25,8 +24,5 @@ export class ForecastViewComponent implements OnInit {
 
   public ngOnInit(): void {
     console.log(lvivWeather);
-    // this.forecastService.getForecast().subscribe((weather: any) => {
-    //   console.log(weather);
-    // });
   }
 }

@@ -1,9 +1,21 @@
 <mat-card>
-  <p>{{ dayName }}</p>
-  <p>{{ dayNumber }}</p>
+  <ng-container *ngIf="mode === forecastInfoType.Day">
+    <p>{{ dayName }}</p>
+    <p>{{ dayNumber }}</p>
+  </ng-container>
+  <ng-container *ngIf="mode === forecastInfoType.Time">
+    <p>{{ dayTime }}</p>
+  </ng-container>
+
   <img src="https://openweathermap.org/img/wn/{{ icon }}@2x.png" alt="weather-icon" />
   <div class="temperature-block">
-    <span>min: {{ minTemp }}</span>
-    <span>max: {{ maxTemp }}</span>
+    <div class="column">
+      <span>min:</span>
+      <span>{{ minTemp }}°</span>
+    </div>
+    <div class="column">
+      <span>max:</span>
+      <span>{{ maxTemp }}°</span>
+    </div>
   </div>
 </mat-card>

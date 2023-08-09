@@ -1,0 +1,9 @@
+<h3>Details for: {{ currentDay.dt_txt | cardDate }}</h3>
+<mat-card class="day-forecast">
+  <weather-app-day-forecast-small
+    *ngFor="let hourForecast of dayForecastList"
+    [weather]="hourForecast"
+    [mode]="forecastInfoType.Time"
+    class="forecast-card">
+  </weather-app-day-forecast-small>
+</mat-card>
