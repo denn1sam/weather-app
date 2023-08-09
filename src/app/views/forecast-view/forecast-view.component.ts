@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ForecastService } from '@services/forecast';
-import { debounceTime, filter, startWith, switchMap } from 'rxjs';
-import { lvivWeather } from './lviv-weather.constant';
+import { Subject, catchError, debounceTime, filter, of, shareReplay, startWith, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'weather-app-forecast-view',
@@ -10,19 +9,27 @@ import { lvivWeather } from './lviv-weather.constant';
   styleUrls: ['./forecast-view.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ForecastViewComponent implements OnInit {
+export class ForecastViewComponent {
   public search = new FormControl<string>('');
 
   public forecast$ = this.search.valueChanges.pipe(
     startWith('Lviv'),
     debounceTime(400),
     filter(Boolean),
-    switchMap(cityName => this.forecastService.getForecastFor5Days(cityName)),
+    tap(() => this.isLoading$.next(true)),
+    switchMap(cityName =>
+      this.forecastService.getForecastFor5Days(cityName).pipe(
+        tap(() => this.isLoading$.next(false)),
+        catchError(() => {
+          this.isLoading$.next(false);
+          return of(null);
+        }),
+      ),
+    ),
+    shareReplay(1),
   );
 
-  constructor(private forecastService: ForecastService) {}
+  public isLoading$ = new Subject<boolean>();
 
-  public ngOnInit(): void {
-    console.log(lvivWeather);
-  }
+  constructor(private forecastService: ForecastService) {}
 }

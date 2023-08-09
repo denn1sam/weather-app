@@ -1,5 +1,12 @@
 <section class="page-section">
   <weather-app-search-field class="search-field" [formControl]="search"></weather-app-search-field>
 
-  <weather-app-forecast-board *ngIf="forecast$ | async as forecast" [forecast]="forecast"></weather-app-forecast-board>
+  <weather-app-forecast-board
+    *ngIf="forecast$ | async as forecast; else noData"
+    [forecast]="forecast"></weather-app-forecast-board>
+
+  <ng-template #noData>
+    <div class="no-data">No Data</div>
+  </ng-template>
 </section>
+<mat-spinner *ngIf="isLoading$ | async" class="spinner"></mat-spinner>
